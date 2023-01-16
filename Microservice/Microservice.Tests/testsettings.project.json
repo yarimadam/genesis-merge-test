@@ -1,0 +1,6 @@
+{
+  "ConnectionStrings": {
+    "PostgreSQL": "User ID=postgres;Password=pwd;Host=localhost;Port=5432;Database=user_app_TMP;"
+  },
+  "DefaultDatabase": "PostgreSQL"
+}

@@ -1,0 +1,11 @@
+{
+  "ProjectName": "Scheduler.API",
+  "GroupName": "Scheduler",
+  "OriginalName": null,
+  "OriginalNameWithoutSuffix": null,
+  "ServiceIndex": 0,
+  "ProjectFlags": 257,
+  "Port": 5001,
+  "RelativePath": "Scheduler\\Scheduler.API\\Scheduler.API.csproj",
+  "Contexts": []
+}

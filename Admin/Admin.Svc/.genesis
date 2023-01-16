@@ -1,0 +1,11 @@
+{
+  "ProjectName": "Admin.Svc",
+  "GroupName": "Admin",
+  "OriginalName": null,
+  "OriginalNameWithoutSuffix": null,
+  "ServiceIndex": 0,
+  "ProjectFlags": 17,
+  "Port": 5050,
+  "RelativePath": "Admin\\Admin.Svc\\Admin.Svc.csproj",
+  "Contexts": []
+}

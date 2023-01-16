@@ -1,0 +1,22 @@
+{
+  "ConnectionStrings": {
+    "GenesisDB": "User ID=postgres;Password=pwd;Host=localhost;Port=5432;Database=genesis_db_TMP;"
+  },
+  "DefaultDatabase": "GenesisDB",
+  "GenesisDBType": "PostgreSQL",
+  "KeepDatabaseAlive": false,
+  "Redis": {
+    "DatabaseIndex": 15
+  },
+  "Serilog": {
+    "MinimumLevel": {
+      "Default": "Warning",
+      "Override": {
+        "Microsoft": "Warning",
+        "Microsoft.Hosting.Lifetime": "Warning",
+        "Microsoft.EntityFrameworkCore": "Information",
+        "System": "Warning"
+      }
+    }
+  }
+}

@@ -1,0 +1,1 @@
+Please visit https://netcoregenesis.com/documentation for details!

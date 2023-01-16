@@ -1,0 +1,26 @@
+﻿It can be used create the context and models in the database automatically in the project.
+
+1) Navigate the data project's root folder for the solution on the termial/command line.
+
+2) The command will be created and run regarding the instructions down below. (Project must be built). 
+
+    -   dotnet ef dbcontext scaffold {connString} {packageName} --output-dir {outputPath} --context-dir {outputPathForContexts} --data-annotations
+    
+    {connString} : The connection information for the database. It can vary to database type.
+    {packageName} : The module name which will establish the database connection for individual database type. (It must be installed in the Project).
+    {outputPath} : Output directory for the created models.
+    {outputPathForContexts} : Output directory for the created DBContext.
+    --data-annotations : Data annotations which will be used while creating the Models. 
+    --force : It can be used to override the context and models which are already created. Otherwise, they will not be overwritten.
+
+    Examples;
+        Postgresql
+        -   dotnet ef dbcontext scaffold "User ID=postgres;Password=123456;Host=ip;Port=5432;Database=db;Pooling=true" Npgsql.EntityFrameworkCore.PostgreSQL --output-dir DBModels --context-dir DBContexts --data-annotations
+        MSSQL
+        -   dotnet ef dbcontext scaffold "Server=server;user id=sa;pwd=password;Database=db;Trusted_Connection=false;Integrated Security=true;" Microsoft.EntityFrameworkCore.SqlServer --output-dir DBModels --context-dir DBContexts --data-annotations
+     
+     For more instructions: https://docs.microsoft.com/tr-tr/ef/core/miscellaneous/cli/dotnet#dotnet-ef-dbcontext-scaffold
+     
+  It is expected to context and models to be created in the given output directories.  
+
+

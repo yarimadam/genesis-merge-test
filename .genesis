@@ -1,0 +1,183 @@
+{
+  "FullPath": "C:\\Users\\tuncay\\Downloads\\genesis-win-x64\\genesis-win-x64\\UserApp\\UserApp.sln",
+  "Projects": [
+    {
+      "ProjectName": "CoreType",
+      "GroupName": "CoreType",
+      "OriginalName": null,
+      "OriginalNameWithoutSuffix": null,
+      "ServiceIndex": 0,
+      "ProjectFlags": 12,
+      "Port": null,
+      "RelativePath": "Base\\CoreType\\CoreType.csproj",
+      "Contexts": []
+    },
+    {
+      "ProjectName": "CoreData",
+      "GroupName": "CoreData",
+      "OriginalName": null,
+      "OriginalNameWithoutSuffix": null,
+      "ServiceIndex": 0,
+      "ProjectFlags": 10,
+      "Port": null,
+      "RelativePath": "Base\\CoreData\\CoreData.csproj",
+      "Contexts": []
+    },
+    {
+      "ProjectName": "CoreSvc",
+      "GroupName": "CoreSvc",
+      "OriginalName": null,
+      "OriginalNameWithoutSuffix": null,
+      "ServiceIndex": 0,
+      "ProjectFlags": 9,
+      "Port": null,
+      "RelativePath": "Base\\CoreSvc\\CoreSvc.csproj",
+      "Contexts": []
+    },
+    {
+      "ProjectName": "CoreTests",
+      "GroupName": "CoreTests",
+      "OriginalName": null,
+      "OriginalNameWithoutSuffix": null,
+      "ServiceIndex": 0,
+      "ProjectFlags": 2056,
+      "Port": null,
+      "RelativePath": "Base\\CoreTests\\CoreTests.csproj",
+      "Contexts": []
+    },
+    {
+      "ProjectName": "Admin.Type",
+      "GroupName": "Admin",
+      "OriginalName": null,
+      "OriginalNameWithoutSuffix": null,
+      "ServiceIndex": 0,
+      "ProjectFlags": 20,
+      "Port": null,
+      "RelativePath": "Admin\\Admin.Type\\Admin.Type.csproj",
+      "Contexts": []
+    },
+    {
+      "ProjectName": "Admin.Data",
+      "GroupName": "Admin",
+      "OriginalName": null,
+      "OriginalNameWithoutSuffix": null,
+      "ServiceIndex": 0,
+      "ProjectFlags": 18,
+      "Port": null,
+      "RelativePath": "Admin\\Admin.Data\\Admin.Data.csproj",
+      "Contexts": []
+    },
+    {
+      "ProjectName": "Admin.Svc",
+      "GroupName": "Admin",
+      "OriginalName": null,
+      "OriginalNameWithoutSuffix": null,
+      "ServiceIndex": 0,
+      "ProjectFlags": 17,
+      "Port": 5050,
+      "RelativePath": "Admin\\Admin.Svc\\Admin.Svc.csproj",
+      "Contexts": []
+    },
+    {
+      "ProjectName": "Admin.Tests",
+      "GroupName": "Admin",
+      "OriginalName": null,
+      "OriginalNameWithoutSuffix": null,
+      "ServiceIndex": 0,
+      "ProjectFlags": 2064,
+      "Port": null,
+      "RelativePath": "Admin\\Admin.Tests\\Admin.Tests.csproj",
+      "Contexts": []
+    },
+    {
+      "ProjectName": "IdentityServer",
+      "GroupName": "IdentityServer",
+      "OriginalName": null,
+      "OriginalNameWithoutSuffix": null,
+      "ServiceIndex": 0,
+      "ProjectFlags": 33,
+      "Port": 5000,
+      "RelativePath": "IdentityServer\\IdentityServer.csproj",
+      "Contexts": []
+    },
+    {
+      "ProjectName": "Scheduler.Core",
+      "GroupName": "Scheduler",
+      "OriginalName": null,
+      "OriginalNameWithoutSuffix": null,
+      "ServiceIndex": 0,
+      "ProjectFlags": 262,
+      "Port": null,
+      "RelativePath": "Scheduler\\Scheduler.Core\\Scheduler.Core.csproj",
+      "Contexts": []
+    },
+    {
+      "ProjectName": "Scheduler.API",
+      "GroupName": "Scheduler",
+      "OriginalName": null,
+      "OriginalNameWithoutSuffix": null,
+      "ServiceIndex": 0,
+      "ProjectFlags": 257,
+      "Port": 5001,
+      "RelativePath": "Scheduler\\Scheduler.API\\Scheduler.API.csproj",
+      "Contexts": []
+    },
+    {
+      "ProjectName": "Scheduler.Tests",
+      "GroupName": "Scheduler",
+      "OriginalName": null,
+      "OriginalNameWithoutSuffix": null,
+      "ServiceIndex": 0,
+      "ProjectFlags": 2304,
+      "Port": null,
+      "RelativePath": "Scheduler\\Scheduler.Tests\\Scheduler.Tests.csproj",
+      "Contexts": []
+    },
+    {
+      "ProjectName": "Microservice.TypeLib",
+      "GroupName": "Microservice",
+      "OriginalName": null,
+      "OriginalNameWithoutSuffix": null,
+      "ServiceIndex": 0,
+      "ProjectFlags": 132,
+      "Port": null,
+      "RelativePath": "Microservice\\Microservice.TypeLib\\Microservice.TypeLib.csproj",
+      "Contexts": []
+    },
+    {
+      "ProjectName": "Microservice.DataLib",
+      "GroupName": "Microservice",
+      "OriginalName": null,
+      "OriginalNameWithoutSuffix": null,
+      "ServiceIndex": 0,
+      "ProjectFlags": 130,
+      "Port": null,
+      "RelativePath": "Microservice\\Microservice.DataLib\\Microservice.DataLib.csproj",
+      "Contexts": []
+    },
+    {
+      "ProjectName": "Microservice.API",
+      "GroupName": "Microservice",
+      "OriginalName": null,
+      "OriginalNameWithoutSuffix": null,
+      "ServiceIndex": 0,
+      "ProjectFlags": 129,
+      "Port": 5051,
+      "RelativePath": "Microservice\\Microservice.API\\Microservice.API.csproj",
+      "Contexts": []
+    },
+    {
+      "ProjectName": "Microservice.Tests",
+      "GroupName": "Microservice",
+      "OriginalName": null,
+      "OriginalNameWithoutSuffix": null,
+      "ServiceIndex": 0,
+      "ProjectFlags": 2176,
+      "Port": null,
+      "RelativePath": "Microservice\\Microservice.Tests\\Microservice.Tests.csproj",
+      "Contexts": []
+    }
+  ],
+  "TemplateType": 1,
+  "TemplateVersion": "3.23.2"
+}

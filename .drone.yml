@@ -1,0 +1,101 @@
+kind: pipeline
+name: default
+
+steps:
+  - name: ui-build
+    image: node:14.4.0
+    commands:
+      - export CI=false
+      - node -v
+      - npm -v
+      - yarn --version
+      - cd UI
+      - echo '***** UI Install *********'
+      - yarn --registry https://registry.npmjs.org
+      - yarn install
+      - echo '***** UI Rebuild *********'
+      - npm rebuild node-sass
+      - echo '***** UI Build *********'
+      - yarn build
+
+  - name: project-build
+    image: mcr.microsoft.com/dotnet/core/sdk:latest
+    commands:
+      - pwd
+      - rm -rf /drone/src/output
+      - mkdir /drone/src/output
+      - ls -la
+
+      - echo '***** UI Phase *********'
+      - cp --preserve=links -a UI/build/. /drone/src/output/ui/
+
+      - echo '***** SVC Build Phase *********'
+      - cd ./Admin/Admin.Svc
+      - dotnet publish -r linux-x64 -c Release -o bin/Release/linux-x64 --self-contained false
+      - echo '***** SVC Copy Phase *****'
+      - cp --preserve=links -a bin/Release/linux-x64/. /drone/src/output/admin-svc/
+      - echo '***** SVC assemblies deployed to host !*****'
+
+      - cd ../../Microservice/Microservice.API
+      - pwd
+      - ls -la
+
+      - echo '***** Microservice Build Phase *****'
+      - dotnet publish -r linux-x64 -c Release -o bin/Release/linux-x64 --self-contained false
+      - echo '***** Microservice Copy Phase *****'
+      - cp --preserve=links -a bin/Release/linux-x64/. /drone/src/output/Microservice/
+      - echo '***** Microservice assemblies deployed to host !*****'
+
+      - cd ../../IdentityServer
+      - pwd
+      - ls -la
+
+      - echo '***** IdSvr Build Phase *****'
+      - dotnet publish -r linux-x64 -c Release -o bin/Release/linux-x64 --self-contained false
+      - echo '***** IdSvr Copy Phase *****'
+      - cp --preserve=links -a bin/Release/linux-x64/. /drone/src/output/idsvr/
+      - echo '***** IdSvr assemblies deployed to host !*****'
+      - echo '***** Output Content !*****'
+      - cd /drone/src/output
+      # This line and any other process that outputs too many lines could lead to a problem with Drone CI, if any problems occurs on this step just comment the line below.
+      - find .
+
+  - name: scp-deploy
+    image: appleboy/drone-scp
+    settings:
+      host: { HostAddress }
+      username: { UserName }
+      password: { Password }
+      port: 22
+      command_timeout: 30m
+      strip_components: 3
+      rm: true
+      target: /var/www/{ProjectName}
+      source: /drone/src/output/*
+
+  - name: app-start
+    image: appleboy/drone-ssh
+    settings:
+      host: { HostAddress }
+      username: { UserName }
+      password: { Password }
+      port: 22
+      script:
+        - { scripts_1 }
+        - { scripts_2 }
+
+  - name: notification
+    image: drillster/drone-email
+    settings:
+      host: { Host }
+      port: { Port }
+      skip_verify: true
+      username: { UserName }
+      password: { Password }
+      from: { FromAddress }
+      recipients: [ { RecipientAddresses } ]
+      when:
+        status: [ changed, failure ]
+
+when:
+  branch: master

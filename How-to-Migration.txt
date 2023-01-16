@@ -1,0 +1,42 @@
+﻿*Adding a Migration
+    At the very first time, you defined the initial domain classes. At this point, there is no database for your application which can store the data from your domain classes. So, firstly, you need to create a migration.
+
+    Open the Package Manager Console from the menu Tools -> NuGet Package Manager -> Package Manager Console in Visual Studio and execute the following command to add a migration.
+
+    PM> add-migration MyFirstMigration
+    
+    If you are using dotnet Command Line Interface, execute the following command.
+
+    CLI> dotnet ef migrations add MyFirstMigration
+    
+    In the above commands, MyFirstMigration is the name of a migration. This will create three files in the Migrations folder of your project, as shown below.
+
+
+*Creating or Updating the Database
+    Use the following command to create or update the database schema.
+
+    Package Manager Console
+    PM> Update-Database
+    CLI> dotnet ef database update
+    
+    The Update command will create the database based on the context and domain classes and the migration snapshot, which is created using the add-migration or add command.
+
+
+*Removing a Migration
+    You can remove the last migration if it is not applied to the database. Use the following remove commands to remove the last created migration files and revert the model snapshot.
+
+    Package Manager Console
+    PM> remove-migration
+    CLI> dotnet ef migrations remove
+    
+    The above commands will remove the last migration and revert the model snapshot to the previous migration. Please note that if a migration is already applied to the database, then it will throw the following exception.
+
+
+*Reverting a Migration
+    Suppose you changed your domain class and created the second migration named MySecondMigration using the add-migration command and applied this migration to the database using the Update command. But, for some reason, you want to revert the database to the previous state. In this case, use the update-database <migration name> command to revert the database to the specified previous migration snapshot.
+
+    Package Manager Console
+    PM> Update-database MyFirstMigration
+    CLI> dotnet ef database update MyFirstMigration.
+    
+    The above command will revert the database based on a migration named MyFirstMigration and remove all the changes applied for the second migration named MySecondMigration. This will also remove MySecondMigration entry from the __EFMigrationsHistory table in the database.

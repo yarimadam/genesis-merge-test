@@ -1,0 +1,95 @@
+{
+  "ApplicationName": "UserApp",
+  "IdentityUrl": "http://127.0.0.1:5000",
+  "ForgotPasswordRelativeUrl": "/forgotPassword",
+  "RegisterRelativeUrl": "/register",
+  "WorkflowDBSchema": "workflow",
+  "Kafka": {
+    "Enabled": false,
+    "Url": "127.0.0.1:9092",
+    "AutoCommit": false,
+    "Topics": {
+      "Mail": {
+        "TopicName": "mail",
+        "GroupId": "mail_consumer",
+        "Interval": 500
+      },
+      "TransactionLog": {
+        "TopicName": "transaction_log",
+        "GroupId": "transaction_log_consumer",
+        "Interval": 250
+      },
+      "CommMail": {
+        "TopicName": "comm_mail",
+        "GroupId": "comm_mail_consumer",
+        "Interval": 500
+      },
+      "CommSMS": {
+        "TopicName": "comm_sms",
+        "GroupId": "comm_sms_consumer",
+        "Interval": 500
+      }
+    }
+  },
+  "Redis": {
+    "Url": "127.0.0.1:6379,password=96PuCGgvhvXdm9EuKwGkabfBkLMBeVgDrDhCeY6GsP3653AA7y4nXADTGav75Ha2,syncTimeout=10000",
+    "DatabaseIndex": 0
+  },
+  //Elastic Search,Logstash, Kibana
+  "ELK": {
+    "Enabled": false,
+    "LogstashUrl": "http://localhost:5044"
+  },
+  "Workflow": {
+    "Smtp": {
+      "Host": "smtp_host",
+      "Port": 465,
+      "DefaultSender": "default_sender",
+      "UserName": "user_mail",
+      "Password": "password",
+      "DeliveryMethod": "Network",
+      "SecureSocketOptions": "None",
+      "RequireCredentials": true
+    },
+    "Timers": {
+      "SweepInterval": "0:00:00:10"
+    }
+  },
+  "Hangfire": {
+    "Mail": {
+      "Server": "smtp",
+      "Port": 465,
+      "UseSsl": true,
+      "User": "user",
+      "Password": "pass"
+    }
+  },
+  "Swagger": {
+    "Enabled": true,
+    "Info": {
+      "Title": "Service API",
+      "Description": "",
+      "Version": "V1",
+      "TermsOfService": "https://netcoregenesis.com",
+      "Contact": {
+        "Name": "Net Core Genesis",
+        "Url": "https://netcoregenesis.com",
+        "Email": "info@netcoregenesis.com"
+      },
+      "License": {
+        "Name": "Licence",
+        "Url": "https://netcoregenesis.com/"
+      }
+    }
+  },
+  "Serilog": {
+    "MinimumLevel": {
+      "Default": "Information",
+      "Override": {
+        "Microsoft": "Information",
+        "Microsoft.Hosting.Lifetime": "Information",
+        "System": "Information"
+      }
+    }
+  }
+}

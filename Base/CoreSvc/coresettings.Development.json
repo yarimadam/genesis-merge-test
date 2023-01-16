@@ -1,0 +1,38 @@
+{
+  "FrontendBaseUrl": "http://localhost:",
+  "ConnectionStrings": {
+    "GenesisDB": "User ID=postgres;Password=pwd;Host=localhost;Port=5432;Database=genesis_db;"
+  },
+  "DefaultDatabase": "GenesisDB",
+  "GenesisDBType": "PostgreSQL",
+  "AllowedCorsOrigins": [
+    "http://localhost:",
+    "http://localhost:5000",
+    "http://localhost:5050",
+    "http://localhost:5051",
+    "http://localhost:5003"
+  ],
+  "IdentityServerSharedSecrets": {
+    "js": "",
+    "scheduler": "fa77fa93b1e84927bb3deada97b51be8",
+    "short.client": "50979b76c4f245f5abaa81e33f7fc9c9",
+    "long.client": "369ec7162eb74ce699e90959659b7c07"
+  },
+  "Workflow": {
+    "Http": {
+      "BaseUrl": "http://localhost:5050"
+    }
+  },
+  "Encryption": {
+    "SymmetricKey": "5e12d28d38584b3ab5721bde55864438"
+  },
+  "Serilog": {
+    "MinimumLevel": {
+      "Default": "Debug",
+      "Override": {
+        "Microsoft": "Information",
+        "Microsoft.Hosting.Lifetime": "Information"
+      }
+    }
+  }
+}

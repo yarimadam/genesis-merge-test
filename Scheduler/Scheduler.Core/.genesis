@@ -1,0 +1,11 @@
+{
+  "ProjectName": "Scheduler.Core",
+  "GroupName": "Scheduler",
+  "OriginalName": null,
+  "OriginalNameWithoutSuffix": null,
+  "ServiceIndex": 0,
+  "ProjectFlags": 262,
+  "Port": null,
+  "RelativePath": "Scheduler\\Scheduler.Core\\Scheduler.Core.csproj",
+  "Contexts": []
+}

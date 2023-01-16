@@ -1,0 +1,28 @@
+version: '3.4'
+
+services:
+
+  ui-project:
+    environment:
+      - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING=true
+    ports:
+      - "3000:3000"
+
+  identitysrv:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+    ports:
+      - "5000:5000"
+
+  adminsvc:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+    ports:
+      - "5050:5050"
+
+  microservice.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+    ports:
+      - "5051:5051"

@@ -1,0 +1,11 @@
+{
+  "ProjectName": "Scheduler.Tests",
+  "GroupName": "Scheduler",
+  "OriginalName": null,
+  "OriginalNameWithoutSuffix": null,
+  "ServiceIndex": 0,
+  "ProjectFlags": 2304,
+  "Port": null,
+  "RelativePath": "Scheduler\\Scheduler.Tests\\Scheduler.Tests.csproj",
+  "Contexts": []
+}

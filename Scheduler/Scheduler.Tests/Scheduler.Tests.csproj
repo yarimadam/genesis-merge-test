@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <IsPackable>false</IsPackable>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="3.1.18" />
+    </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\..\Base\CoreTests\CoreTests.csproj" />
+        <ProjectReference Include="..\Scheduler.API\Scheduler.API.csproj" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="..\..\Base\CoreTests\testsettings*.json">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+            <DependentUpon>$([System.Text.RegularExpressions.Regex]::Replace(%(Filename),"\.?\w+$",".json"))</DependentUpon>
+        </Content>
+        <Content Update="testsettings.project.json">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+    </ItemGroup>
+    <ItemGroup>
+        <None Remove=".genesis" />
+    </ItemGroup>
+</Project>

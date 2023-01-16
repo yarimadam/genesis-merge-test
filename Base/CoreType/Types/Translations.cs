@@ -1,0 +1,69 @@
+﻿namespace CoreType.Types
+{
+    public class Translations
+    {
+        public string TR { get; set; }
+        public string EN { get; set; }
+        public string DE { get; set; }
+        public string ZA { get; set; }
+        public string AE { get; set; }
+        public string SA { get; set; }
+        public string AZ { get; set; }
+        public string BY { get; set; }
+        public string BG { get; set; }
+        public string BA { get; set; }
+        public string ES { get; set; }
+        public string CZ { get; set; }
+        public string GB { get; set; }
+        public string DK { get; set; }
+        public string MV { get; set; }
+        public string GR { get; set; }
+        public string EE { get; set; }
+        public string IR { get; set; }
+        public string FI { get; set; }
+        public string FO { get; set; }
+        public string BE { get; set; }
+        public string FR { get; set; }
+        public string IN { get; set; }
+        public string IL { get; set; }
+        public string HR { get; set; }
+        public string HU { get; set; }
+        public string AM { get; set; }
+        public string ID { get; set; }
+        public string IS { get; set; }
+        public string IT { get; set; }
+        public string JP { get; set; }
+        public string GE { get; set; }
+        public string KZ { get; set; }
+        public string KG { get; set; }
+        public string LT { get; set; }
+        public string LV { get; set; }
+        public string MK { get; set; }
+        public string MN { get; set; }
+        public string MY { get; set; }
+        public string MT { get; set; }
+        public string NO { get; set; }
+        public string NL { get; set; }
+        public string PL { get; set; }
+        public string BR { get; set; }
+        public string PT { get; set; }
+        public string RO { get; set; }
+        public string RU { get; set; }
+        public string SE { get; set; }
+        public string SK { get; set; }
+        public string SI { get; set; }
+        public string AL { get; set; }
+        public string SP { get; set; }
+        public string KE { get; set; }
+        public string TH { get; set; }
+        public string UA { get; set; }
+        public string PK { get; set; }
+        public string UZ { get; set; }
+        public string VN { get; set; }
+        public string CN { get; set; }
+        public string HK { get; set; }
+        public string MO { get; set; }
+        public string SG { get; set; }
+        public string TW { get; set; }
+    }
+}

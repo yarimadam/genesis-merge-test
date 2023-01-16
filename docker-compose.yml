@@ -1,0 +1,86 @@
+version: '3.4'
+
+services:
+
+  kafka:
+    image: johnnypark/kafka-zookeeper
+    ports:
+      - "2181:2181"
+      - "9092:9092"
+    network_mode: bridge
+    environment:
+      ADVERTISED_HOST: 127.0.0.1
+      NUM_PARTITIONS: 1
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  redis:
+    image: redis:latest
+    command:
+      - redis-server
+      - /usr/local/etc/redis/redis.conf
+    #container_name: redis
+    hostname: redis
+    ports:
+      - "127.0.0.1:6379:6379" # enable host access only. otherwise overrides ufw/iptables and exposes port to internet
+    network_mode: bridge
+    volumes:
+      - ./redis.conf:/usr/local/etc/redis/redis.conf
+      - redis-data:/data
+
+  ui-project:
+    #container_name: ui-project
+    build:
+      context: .
+      dockerfile: UI/Dockerfile
+    network_mode: bridge
+    volumes:
+      - './UI/:/usr/src/app'
+      - '/usr/src/app/node_modules'
+    depends_on:
+      - redis
+      - kafka
+      - adminsvc
+      - identitysrv
+
+  identitysrv:
+    image: ${DOCKER_REGISTRY-}identitysrv
+    build:
+      context: .
+      dockerfile: IdentityServer/Dockerfile
+    network_mode: bridge
+    depends_on:
+      - kafka
+
+  adminsvc:
+    image: ${DOCKER_REGISTRY-}adminsvc
+    build:
+      context: .
+      dockerfile: Admin/Admin.Svc/Dockerfile
+    network_mode: bridge
+    depends_on:
+      - kafka
+
+  microservice.api:
+    image: ${DOCKER_REGISTRY-}microservice
+    build:
+      context: .
+      dockerfile: Microservice/Microservice.API/Dockerfile
+    network_mode: bridge
+    depends_on:
+      - kafka
+
+  elk:
+    image: sebp/elk
+    ports:
+      - "5601:5601"
+      - "9200:9200"
+      - "5044:5044"
+    network_mode: bridge
+    volumes:
+      - ./logstash.conf:/etc/logstash/conf.d/02-beats-input.conf
+      - elk-data:/var/lib/elasticsearch
+
+volumes:
+  redis-data:
+  elk-data:

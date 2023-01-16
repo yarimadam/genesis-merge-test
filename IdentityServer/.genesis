@@ -1,0 +1,11 @@
+{
+  "ProjectName": "IdentityServer",
+  "GroupName": "IdentityServer",
+  "OriginalName": null,
+  "OriginalNameWithoutSuffix": null,
+  "ServiceIndex": 0,
+  "ProjectFlags": 33,
+  "Port": 5000,
+  "RelativePath": "IdentityServer\\IdentityServer.csproj",
+  "Contexts": []
+}

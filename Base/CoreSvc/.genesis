@@ -1,0 +1,11 @@
+{
+  "ProjectName": "CoreSvc",
+  "GroupName": "CoreSvc",
+  "OriginalName": null,
+  "OriginalNameWithoutSuffix": null,
+  "ServiceIndex": 0,
+  "ProjectFlags": 9,
+  "Port": null,
+  "RelativePath": "Base\\CoreSvc\\CoreSvc.csproj",
+  "Contexts": []
+}

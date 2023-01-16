@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk.Web">
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="IdentityServer4" Version="3.1.0" />
+    </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\Admin\Admin.Data\Admin.Data.csproj" />
+        <ProjectReference Include="..\Base\CoreSvc\CoreSvc.csproj" />
+    </ItemGroup>
+    <ItemGroup>
+        <Folder Include="wwwroot\" />
+        <None Remove=".genesis" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="..\Base\CoreSvc\coresettings*.json">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+            <DependentUpon>$([System.Text.RegularExpressions.Regex]::Replace(%(Filename),"\.?\w+$",".json"))</DependentUpon>
+        </Content>
+        <Content Update="appsettings*.json">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+            <DependentUpon>$([System.Text.RegularExpressions.Regex]::Replace(%(Filename),"\.?\w+$",".json"))</DependentUpon>
+        </Content>
+    </ItemGroup>
+    <ItemGroup>
+        <None Update="tempkey.rsa">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
+</Project>

@@ -1,0 +1,11 @@
+{
+  "ProjectName": "Microservice.API",
+  "GroupName": "Microservice",
+  "OriginalName": null,
+  "OriginalNameWithoutSuffix": null,
+  "ServiceIndex": 0,
+  "ProjectFlags": 129,
+  "Port": 5051,
+  "RelativePath": "Microservice\\Microservice.API\\Microservice.API.csproj",
+  "Contexts": []
+}

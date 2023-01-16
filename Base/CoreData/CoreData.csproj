@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>netstandard2.1</TargetFramework>
+        <RootNamespace>CoreData</RootNamespace>
+        <AssemblyName>CoreData</AssemblyName>
+        <Authors>Net Core Genesis Technology Inc.</Authors>
+        <Company>Net Core Genesis Technology Inc.</Company>
+        <GeneratePackageOnBuild Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">true</GeneratePackageOnBuild>
+        <Description>Genesis solution core data access library</Description>
+        <PackageVersion>1.2.32</PackageVersion>
+        <PackageId>CoreData</PackageId>
+        <ReleaseVersion>1.2.32</ReleaseVersion>
+        <SynchReleaseVersion>false</SynchReleaseVersion>
+        <PackOnBuild>false</PackOnBuild>
+        <IsPackable>false</IsPackable>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+        <NoWarn>1701;1702;1705;1591</NoWarn>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.7">
+            <PrivateAssets>compile; buildMultitargeting; build; native; contentfiles; analyzers; buildtransitive</PrivateAssets>
+            <IncludeAssets>runtime</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Confluent.Kafka" Version="1.5.2" />
+        <PackageReference Include="CoreCompat.System.Drawing" Version="1.0.0-beta006" />
+        <PackageReference Include="EasyCaching.Redis" Version="1.1.0" />
+        <PackageReference Include="EFCoreSecondLevelCacheInterceptor" Version="3.1.1" />
+        <PackageReference Include="IdentityModel" Version="4.5.0" />
+        <PackageReference Include="Mapster" Version="7.0.1" />
+        <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+        <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="3.1.10" />
+        <PackageReference Include="Oracle.EntityFrameworkCore" Version="5.21.1" />
+        <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="5.0.1" />
+        <PackageReference Include="SmartFormat.NET" Version="2.5.3" />
+        <PackageReference Include="System.Linq.Dynamic.Core" Version="1.2.6" />
+        <PackageReference Include="Npgsql" Version="5.0.7" />
+        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.7" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.7" />
+        <PackageReference Include="StackExchange.Redis" Version="2.2.4" />
+        <PackageReference Include="Microsoft.Extensions.Configuration" Version="5.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="5.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="5.0.0" />
+        <PackageReference Include="Serilog.AspNetCore" Version="4.1.0" />
+        <PackageReference Include="Serilog.Settings.Configuration" Version="3.1.0" />
+        <PackageReference Include="Serilog.Sinks.Http" Version="7.2.0" />
+        <PackageReference Include="Z.EntityFramework.Extensions.EFCore" Version="5.2.2" />
+    </ItemGroup>
+    <ItemGroup>
+        <None Remove=".genesis" />
+    </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\CoreType\CoreType.csproj" />
+        <ProjectReference Include="..\..\Scheduler\Scheduler.Core\Scheduler.Core.csproj" />
+    </ItemGroup>
+</Project>

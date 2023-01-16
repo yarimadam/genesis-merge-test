@@ -1,0 +1,53 @@
+﻿***WARNING - OUTDATED INFO, Please refer to online docs for further info: https://netcoregenesis.com/documentation/ ***
+
+1) Navigate the directory which keeps the genesis.dll on the terminal/command line. e.g. cd .../genesis/bin/Debug/netcoreapp2.2
+
+2) The command below can be used to create a template.
+
+    - ./genesis create --path {output directory path} --token {api token}
+        
+        -token (required): It can be optained with login via API.
+        -path (optional): If there is no given parameters, templates will be created in the same directory.
+    
+CLI Commands
+
+  create       Creates microservice templates               
+  
+  update(v2)   Updates current templates                 
+
+  help         Display more information on a specific command.
+
+  version      Display version information.
+  
+  
+-create command parameters
+
+  -p, --path             Target path                       
+
+  -t, --template-type    Micro-service choice               
+
+  -n, --app-name         Application/Solution Name(v2)       
+
+  -m, --service-names    Microservice Names                 
+
+  -b, --bff-name         Backend For Frontend Name          
+
+  -d, --db-type          Database Type                      
+
+  -c, --conn-string      Database Connection String        
+
+  -v, --verbose          Set output to verbose messages.    
+
+  --help                 Display this help screen.          
+
+  --version              Display version information.      
+  
+  
+-update command parameters
+  
+  --help                 Display this help screen.         
+
+  --version              Display version information.     
+
+
+  
