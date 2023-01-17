@@ -1,30 +1,29 @@
-﻿using CoreType.DBModels;
+using CoreData.Validators;
 using FluentValidation;
+using CoreType.DBModels;
 
 namespace CoreData.Validators
 {
-    public class CoreUserValidator : AbstractValidator<CoreUsers>
+    public class CoreUserValidator : AbstractValidator<CoreUser>
     {
         public CoreUserValidator()
         {
+            RuleFor(x => x.UserId)
+                .NotNull();
+
             RuleFor(x => x.IbanNumber)
-                .MinimumLength(20)
-                .MaximumLength(32);
+                .MaximumLength(33);
 
             RuleFor(x => x.Name)
-                .NotNull()
-                .MinimumLength(2)
-                .MaximumLength(30);
+                .NotEmpty()
+                .MaximumLength(50);
 
             RuleFor(x => x.Surname)
-                .MinimumLength(2)
+                .NotEmpty()
                 .MaximumLength(50);
 
             RuleFor(x => x.Email)
-                .NotEmpty()
-                .MinimumLength(6)
-                .MaximumLength(50)
-                .EmailAddress();
+                .MaximumLength(80);
 
             RuleFor(x => x.RegistrationNumber)
                 .MaximumLength(20);
@@ -42,7 +41,13 @@ namespace CoreData.Validators
                 .MaximumLength(500);
 
             RuleFor(x => x.PhoneNumber)
-                .MaximumLength(16);
+                .MaximumLength(254);
+
+            RuleFor(x => x.ShouldChangePassword)
+                .NotNull();
+
+            RuleFor(x => x.TenantId)
+                .NotNull();
         }
     }
 }

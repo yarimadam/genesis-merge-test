@@ -1,6 +1,7 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using CoreType.Types;
+
+#nullable disable
 
 namespace CoreType.DBModels
 {
@@ -10,7 +11,7 @@ namespace CoreType.DBModels
         public int EmployeeId { get; set; }
         public string EmployeeTaskName { get; set; }
         public string EmployeeTaskDescription { get; set; }
-        public List<TaskContent> TaskTags { get; set; }
+        public string TaskTags { get; set; }
         public DateTime DueDate { get; set; }
         public int Status { get; set; }
     }

@@ -1,11 +1,8 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using CoreData.Common;
-using CoreData.Infrastructure;
-using CoreData.Validators;
+using System;
 using CoreType.DBModels;
-using CoreType.Types;
-using Microsoft.EntityFrameworkCore;
+using CoreData.Common;
+using CoreData.DBContexts;
+using CoreData.Validators;
 
 namespace CoreData.Repositories
 {
@@ -17,36 +14,6 @@ namespace CoreData.Repositories
 
         public NotificationRepository(GenesisContextBase context) : base(context)
         {
-        }
-
-        public override async Task<PaginationWrapper<Notification>> ListAsync(RequestWithPagination<Notification> request)
-        {
-            request.Criteria.UserId = Session.GetUserId();
-
-            return await ListAsQueryable(request)
-                .ThenByDescending(x => x.CreatedDate)
-                .ToPaginatedListAsync(request);
-        }
-
-        public async Task<PaginationWrapper<Notification>> ListDetails(RequestWithPagination<Notification> entity)
-        {
-            entity.Criteria.UserId = Session.GetUserId();
-
-            return await DbSet(true)
-                .Include(x => x.NotificationSettings)
-                .AddFilters(entity)
-                .Where(x => x.Status != 3)
-                .AddSortings(entity)
-                .ThenByDescending(x => x.CreatedDate)
-                .SelectExclusively(e => e.NotificationSettings.Data)
-                .ToPaginatedListAsync(entity);
-        }
-
-        public override async Task<Notification> GetAsync(Notification entity, bool noTracking = false, bool ignoreQueryFilters = false)
-        {
-            return await GetAsQueryable(entity, noTracking, ignoreQueryFilters)
-                .Include(x => x.NotificationSettings)
-                .FirstOrDefaultAsync();
         }
     }
 }

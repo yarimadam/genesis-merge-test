@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
+
+#nullable disable
 
 namespace CoreType.DBModels
 {
@@ -6,7 +9,7 @@ namespace CoreType.DBModels
     {
         public AuthTemplate()
         {
-            AuthTemplateDetail = new HashSet<AuthTemplateDetail>();
+            AuthTemplateDetails = new HashSet<AuthTemplateDetail>();
         }
 
         public int AuthTemplateId { get; set; }
@@ -15,7 +18,8 @@ namespace CoreType.DBModels
         public int TemplateType { get; set; }
         public int Status { get; set; }
         public bool IsDefault { get; set; }
+        public int TenantId { get; set; }
 
-        public virtual ICollection<AuthTemplateDetail> AuthTemplateDetail { get; set; }
+        public virtual ICollection<AuthTemplateDetail> AuthTemplateDetails { get; set; }
     }
 }

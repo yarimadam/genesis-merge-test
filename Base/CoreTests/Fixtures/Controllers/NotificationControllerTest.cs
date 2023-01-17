@@ -1,29 +1,26 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Bogus;
-using CoreSvc.Controllers;
+using CoreTests;
 using CoreTests.Infrastructure;
 using CoreTests.Infrastructure.Extensions;
-using CoreType.DBModels;
-using CoreType.Types;
 using FluentAssertions;
 using NUnit.Framework;
+using CoreSvc.Controllers;
+using CoreType.DBModels;
 
 namespace CoreTests.Fixtures.Controllers
 {
-    [Category("Genesis_API")]
+    [Category("API")]
     public class NotificationControllerTest
     {
         public static readonly Faker<Notification> EntityFaker = new Faker<Notification>()
-            .RuleFor(e => e.NotificationSettings, f => NotificationSettingControllerTest.EntityFaker.Generate())
-            .RuleFor(e => e.Status, f => (int) f.PickRandomWithout(Status.Deleted));
+            .RuleFor(e => e.NotificationSettingsId, f => f.RandomByType<int>())
+            .RuleFor(e => e.Status, f => f.RandomByType<int>())
+            .RuleFor(e => e.TenantId, f => f.RandomByType<int>());
 
         public static readonly List<Notification> Entities = EntityFaker.Generate(Constants.DEFAULT_ENTITY_GENERATION_COUNT);
-
-        public NotificationControllerTest()
-        {
-            Entities.ForEach(e => e.UserId = TestContext.ActiveUser.UserId);
-        }
 
         [Test, Order(1)]
         [TestCaseSource(nameof(Entities))]
@@ -36,6 +33,7 @@ namespace CoreTests.Fixtures.Controllers
             var response = await controller.Insert(entity);
 
             // Assert
+            // TODO Check for created date/user fields
             response.Should().BeValidWithData();
         }
 
@@ -52,6 +50,7 @@ namespace CoreTests.Fixtures.Controllers
             var response = await controller.Update(entity);
 
             // Assert
+            // TODO Check for updated date/user fields
             response.Should().BeValidWithData();
         }
 

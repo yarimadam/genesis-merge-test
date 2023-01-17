@@ -1,45 +1,48 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Bogus;
-using CoreSvc.Controllers;
+using CoreTests;
 using CoreTests.Infrastructure;
 using CoreTests.Infrastructure.Extensions;
-using CoreType.DBModels;
-using CoreType.Types;
 using FluentAssertions;
 using NUnit.Framework;
+using CoreSvc.Controllers;
+using CoreType.DBModels;
 
 namespace CoreTests.Fixtures.Controllers
 {
-    [Category("Genesis_API")]
+    [Category("API")]
     public class NotificationSettingControllerTest
     {
-        public static readonly Faker<NotificationSettings> EntityFaker = new Faker<NotificationSettings>()
-            .RuleFor(e => e.NotificationType, f => (int) f.PickRandom<SocketActionType>())
-            .RuleFor(e => e.Status, f => (int) f.PickRandomWithout(Status.Deleted));
+        public static readonly Faker<NotificationSetting> EntityFaker = new Faker<NotificationSetting>()
+            .RuleFor(e => e.NotificationType, f => f.RandomByType<int>())
+            .RuleFor(e => e.Status, f => f.RandomByType<int>())
+            .RuleFor(e => e.TenantId, f => f.RandomByType<int>());
 
-        public static readonly List<NotificationSettings> Entities = EntityFaker.Generate(Constants.DEFAULT_ENTITY_GENERATION_COUNT);
+        public static readonly List<NotificationSetting> Entities = EntityFaker.Generate(Constants.DEFAULT_ENTITY_GENERATION_COUNT);
 
         [Test, Order(1)]
         [TestCaseSource(nameof(Entities))]
-        public async Task Insert_ValidRecord_ReturnsRecord(NotificationSettings entity)
+        public async Task Insert_ValidRecord_ReturnsRecord(NotificationSetting entity)
         {
             // Arrange
-            var controller = new NotificationSettingsController();
+            var controller = new NotificationSettingController();
 
             // Act
             var response = await controller.Insert(entity);
 
             // Assert
+            // TODO Check for created date/user fields
             response.Should().BeValidWithData();
         }
 
         [Test, Order(2)]
         [TestCaseSource(nameof(Entities))]
-        public async Task Update_ValidRecord_ReturnsRecord(NotificationSettings entity)
+        public async Task Update_ValidRecord_ReturnsRecord(NotificationSetting entity)
         {
             // Arrange
-            var controller = new NotificationSettingsController();
+            var controller = new NotificationSettingController();
 
             // Update fields
 
@@ -47,15 +50,16 @@ namespace CoreTests.Fixtures.Controllers
             var response = await controller.Update(entity);
 
             // Assert
+            // TODO Check for updated date/user fields
             response.Should().BeValidWithData();
         }
 
         [Test, Order(3)]
         [TestCaseSource(nameof(Entities))]
-        public async Task Get_ValidRecord_ReturnsRecord(NotificationSettings entity)
+        public async Task Get_ValidRecord_ReturnsRecord(NotificationSetting entity)
         {
             // Arrange
-            var controller = new NotificationSettingsController();
+            var controller = new NotificationSettingController();
 
             // Act
             var response = await controller.Get(entity);
@@ -66,10 +70,10 @@ namespace CoreTests.Fixtures.Controllers
 
         [Test, Order(4)]
         [TestCaseSource(nameof(Entities))]
-        public async Task List_ByEntity_ReturnsRecord(NotificationSettings entity)
+        public async Task List_ByEntity_ReturnsRecord(NotificationSetting entity)
         {
             // Arrange
-            var controller = new NotificationSettingsController();
+            var controller = new NotificationSettingController();
             var request = TestHelper.CreateListRequest(entity);
 
             // Act
@@ -82,10 +86,10 @@ namespace CoreTests.Fixtures.Controllers
 
         [Test, Order(5)]
         [TestCaseSource(nameof(Entities))]
-        public async Task Delete_ValidRecord_ReturnsTrue(NotificationSettings entity)
+        public async Task Delete_ValidRecord_ReturnsTrue(NotificationSetting entity)
         {
             // Arrange
-            var controller = new NotificationSettingsController();
+            var controller = new NotificationSettingController();
 
             // Act
             var response = await controller.Delete(entity);

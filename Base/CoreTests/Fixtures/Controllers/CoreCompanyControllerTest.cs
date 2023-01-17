@@ -1,22 +1,24 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Bogus;
-using CoreSvc.Controllers;
+using CoreTests;
 using CoreTests.Infrastructure;
 using CoreTests.Infrastructure.Extensions;
-using CoreType.DBModels;
-using CoreType.Types;
 using FluentAssertions;
 using NUnit.Framework;
+using CoreSvc.Controllers;
+using CoreType.DBModels;
 
 namespace CoreTests.Fixtures.Controllers
 {
-    [Category("Genesis_API")]
+    [Category("API")]
     public class CoreCompanyControllerTest
     {
         public static readonly Faker<CoreCompany> EntityFaker = new Faker<CoreCompany>()
-            .RuleFor(e => e.CompanyName, f => f.Company.CompanyName())
-            .RuleFor(e => e.Status, f => (int) f.PickRandomWithout(Status.Deleted));
+            .RuleFor(e => e.CompanyName, f => f.RandomByType<string>(maxLength: 150))
+            .RuleFor(e => e.Status, f => f.RandomByType<int>())
+            .RuleFor(e => e.TenantId, f => f.RandomByType<int>());
 
         public static readonly List<CoreCompany> Entities = EntityFaker.Generate(Constants.DEFAULT_ENTITY_GENERATION_COUNT);
 
@@ -31,6 +33,7 @@ namespace CoreTests.Fixtures.Controllers
             var response = await controller.Insert(entity);
 
             // Assert
+            // TODO Check for created date/user fields
             response.Should().BeValidWithData();
         }
 
@@ -47,6 +50,7 @@ namespace CoreTests.Fixtures.Controllers
             var response = await controller.Update(entity);
 
             // Assert
+            // TODO Check for updated date/user fields
             response.Should().BeValidWithData();
         }
 

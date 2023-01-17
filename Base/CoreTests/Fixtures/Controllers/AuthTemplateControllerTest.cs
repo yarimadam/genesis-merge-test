@@ -1,23 +1,26 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Bogus;
-using CoreSvc.Controllers;
+using CoreTests;
 using CoreTests.Infrastructure;
 using CoreTests.Infrastructure.Extensions;
-using CoreType.DBModels;
-using CoreType.Types;
 using FluentAssertions;
 using NUnit.Framework;
+using CoreSvc.Controllers;
+using CoreType.DBModels;
 
 namespace CoreTests.Fixtures.Controllers
 {
-    [Category("Genesis_API")]
+    [Category("API")]
     public class AuthTemplateControllerTest
     {
         public static readonly Faker<AuthTemplate> EntityFaker = new Faker<AuthTemplate>()
             .RuleFor(e => e.TemplateName, f => f.RandomByType<string>(maxLength: 100))
-            .RuleFor(e => e.TemplateType, f => (int) f.PickRandom<AuthTemplateType>())
-            .RuleFor(e => e.Status, f => (int) f.PickRandomWithout(Status.Deleted));
+            .RuleFor(e => e.TemplateType, f => f.RandomByType<int>())
+            .RuleFor(e => e.Status, f => f.RandomByType<int>())
+            .RuleFor(e => e.IsDefault, f => f.RandomByType<bool>())
+            .RuleFor(e => e.TenantId, f => f.RandomByType<int>());
 
         public static readonly List<AuthTemplate> Entities = EntityFaker.Generate(Constants.DEFAULT_ENTITY_GENERATION_COUNT);
 
@@ -26,12 +29,13 @@ namespace CoreTests.Fixtures.Controllers
         public async Task Insert_ValidRecord_ReturnsRecord(AuthTemplate entity)
         {
             // Arrange
-            var controller = new AuthTemplatesController();
+            var controller = new AuthTemplateController();
 
             // Act
             var response = await controller.Insert(entity);
 
             // Assert
+            // TODO Check for created date/user fields
             response.Should().BeValidWithData();
         }
 
@@ -40,7 +44,7 @@ namespace CoreTests.Fixtures.Controllers
         public async Task Update_ValidRecord_ReturnsRecord(AuthTemplate entity)
         {
             // Arrange
-            var controller = new AuthTemplatesController();
+            var controller = new AuthTemplateController();
 
             // Update fields
 
@@ -48,6 +52,7 @@ namespace CoreTests.Fixtures.Controllers
             var response = await controller.Update(entity);
 
             // Assert
+            // TODO Check for updated date/user fields
             response.Should().BeValidWithData();
         }
 
@@ -56,7 +61,7 @@ namespace CoreTests.Fixtures.Controllers
         public async Task Get_ValidRecord_ReturnsRecord(AuthTemplate entity)
         {
             // Arrange
-            var controller = new AuthTemplatesController();
+            var controller = new AuthTemplateController();
 
             // Act
             var response = await controller.Get(entity);
@@ -70,7 +75,7 @@ namespace CoreTests.Fixtures.Controllers
         public async Task List_ByEntity_ReturnsRecord(AuthTemplate entity)
         {
             // Arrange
-            var controller = new AuthTemplatesController();
+            var controller = new AuthTemplateController();
             var request = TestHelper.CreateListRequest(entity);
 
             // Act
@@ -86,7 +91,7 @@ namespace CoreTests.Fixtures.Controllers
         public async Task Delete_ValidRecord_ReturnsTrue(AuthTemplate entity)
         {
             // Arrange
-            var controller = new AuthTemplatesController();
+            var controller = new AuthTemplateController();
 
             // Act
             var response = await controller.Delete(entity);

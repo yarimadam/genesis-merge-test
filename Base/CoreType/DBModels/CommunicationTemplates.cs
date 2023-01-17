@@ -1,4 +1,4 @@
-﻿namespace CoreType.DBModels
+namespace CoreType.DBModels
 {
     public partial class CommunicationTemplates
     {

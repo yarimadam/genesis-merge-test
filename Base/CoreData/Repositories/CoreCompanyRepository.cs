@@ -1,7 +1,8 @@
-﻿using CoreData.Common;
-using CoreData.Infrastructure;
-using CoreData.Validators;
+using System;
 using CoreType.DBModels;
+using CoreData.Common;
+using CoreData.DBContexts;
+using CoreData.Validators;
 
 namespace CoreData.Repositories
 {

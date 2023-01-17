@@ -1,18 +1,16 @@
-﻿using System.Threading.Tasks;
-using CoreData;
-using CoreSvc.Common;
+using System.Threading.Tasks;
 using CoreSvc.Filters;
-using CoreSvc.Services;
-using CoreType.DBModels;
 using CoreType.Types;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using CoreType.DBModels;
+using CoreSvc.Services;
 
 namespace CoreSvc.Controllers
 {
     [Authorize]
     [DefaultRoute]
-    [Resources(Constants.ResourceCodes.Notification_res)]
+    [Resources("Notification_Res")]
     public class NotificationController : BaseController
     {
         private readonly NotificationService _mainService = new NotificationService();
@@ -22,19 +20,6 @@ namespace CoreSvc.Controllers
         public async Task<ResponseWrapper<PaginationWrapper<Notification>>> List([FromBody] RequestWithPagination<Notification> request)
         {
             return await _mainService.ListAsync(request);
-        }
-
-        [HttpPost]
-        [ClaimRequirement(ActionType.List)]
-        public async Task<ResponseWrapper<PaginationWrapper<Notification>>> ListDetails([FromBody] RequestWithPagination<Notification> request)
-        {
-            var genericResponse = new ResponseWrapper<PaginationWrapper<Notification>>();
-
-            genericResponse.Data = await _mainService.Repository.ListDetails(request);
-            genericResponse.Message = LocalizedMessages.PROCESS_SUCCESSFUL;
-            genericResponse.Success = true;
-
-            return genericResponse;
         }
 
         [HttpPost]
@@ -56,6 +41,13 @@ namespace CoreSvc.Controllers
         public async Task<ResponseWrapper<Notification>> Update([FromBody] Notification request)
         {
             return await _mainService.SaveAsync(request);
+        }
+
+        [HttpPost]
+        [ClaimRequirement(ActionType.Import)]
+        public Task<ResponseWrapper> BulkSave([FromBody] RequestWithExcelData<Notification> request)
+        {
+            return _mainService.BulkSaveAsync(request);
         }
 
         [HttpPost]

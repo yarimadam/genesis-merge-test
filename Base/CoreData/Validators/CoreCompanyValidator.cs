@@ -1,5 +1,6 @@
-﻿using CoreType.DBModels;
+using CoreData.Validators;
 using FluentValidation;
+using CoreType.DBModels;
 
 namespace CoreData.Validators
 {
@@ -7,8 +8,11 @@ namespace CoreData.Validators
     {
         public CoreCompanyValidator()
         {
+            RuleFor(x => x.CompanyId)
+                .NotNull();
+
             RuleFor(x => x.CompanyName)
-                .NotNull()
+                .NotEmpty()
                 .MaximumLength(150);
 
             RuleFor(x => x.CompanyLegalTitle)
@@ -33,7 +37,6 @@ namespace CoreData.Validators
                 .MaximumLength(20);
 
             RuleFor(x => x.ContactPersonEmail)
-                .EmailAddress()
                 .MaximumLength(75);
 
             RuleFor(x => x.Address)
@@ -43,13 +46,15 @@ namespace CoreData.Validators
                 .MaximumLength(20);
 
             RuleFor(x => x.Email)
-                .EmailAddress()
                 .MaximumLength(100);
 
             RuleFor(x => x.Website)
                 .MaximumLength(100);
 
             RuleFor(x => x.Status)
+                .NotNull();
+
+            RuleFor(x => x.TenantId)
                 .NotNull();
         }
     }

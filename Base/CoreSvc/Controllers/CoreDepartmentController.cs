@@ -1,17 +1,16 @@
-﻿using System.Threading.Tasks;
-using CoreSvc.Common;
+using System.Threading.Tasks;
 using CoreSvc.Filters;
-using CoreSvc.Services;
-using CoreType.DBModels;
 using CoreType.Types;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using CoreType.DBModels;
+using CoreSvc.Services;
 
 namespace CoreSvc.Controllers
 {
     [Authorize]
     [DefaultRoute]
-    [Resources(Constants.ResourceCodes.CoreDepartment_Res)]
+    [Resources("CoreDepartment_Res")]
     public class CoreDepartmentController : BaseController
     {
         private readonly CoreDepartmentService _mainService = new CoreDepartmentService();
