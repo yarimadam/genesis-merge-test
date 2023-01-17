@@ -1,5 +1,6 @@
-﻿using CoreType.DBModels;
+using CoreData.Validators;
 using FluentValidation;
+using CoreType.DBModels;
 
 namespace CoreData.Validators
 {
@@ -14,6 +15,9 @@ namespace CoreData.Validators
                 .NotNull();
 
             RuleFor(x => x.Status)
+                .NotNull();
+
+            RuleFor(x => x.TenantId)
                 .NotNull();
         }
     }

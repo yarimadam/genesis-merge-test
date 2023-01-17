@@ -1,4 +1,4 @@
-﻿using CoreType.Attributes;
+using CoreType.Attributes;
 
 namespace CoreType.DBModels
 {

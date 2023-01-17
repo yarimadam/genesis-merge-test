@@ -1,20 +1,19 @@
-﻿using System.Threading.Tasks;
-using CoreSvc.Common;
+using System.Threading.Tasks;
 using CoreSvc.Filters;
-using CoreSvc.Services;
-using CoreType.DBModels;
 using CoreType.Types;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using CoreType.DBModels;
+using CoreSvc.Services;
 
 namespace CoreSvc.Controllers
 {
     [Authorize]
     [DefaultRoute]
-    [Resources(Constants.ResourceCodes.CoreCompany_Res)]
+    [Resources("CoreCompany_Res")]
     public class CoreCompanyController : BaseController
     {
-        private readonly CompanyService _mainService = new CompanyService();
+        private readonly CoreCompanyService _mainService = new CoreCompanyService();
 
         [HttpPost]
         [ClaimRequirement(ActionType.List)]

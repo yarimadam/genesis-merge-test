@@ -1,24 +1,26 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Bogus;
-using CoreSvc.Controllers;
+using CoreTests;
 using CoreTests.Infrastructure;
 using CoreTests.Infrastructure.Extensions;
-using CoreType.DBModels;
-using CoreType.Types;
 using FluentAssertions;
 using NUnit.Framework;
+using CoreSvc.Controllers;
+using CoreType.DBModels;
 
 namespace CoreTests.Fixtures.Controllers
 {
-    [Category("Genesis_API")]
+    [Category("API")]
     public class AuthTemplateDetailControllerTest
     {
         public static readonly Faker<AuthTemplateDetail> EntityFaker = new Faker<AuthTemplateDetail>()
-            .RuleFor(e => e.AuthTemplate, f => AuthTemplateControllerTest.EntityFaker.Generate())
-            .RuleFor(e => e.ResourceId, f => f.RandomByType<int>(minValue: 1))
-            .RuleFor(e => e.ActionId, f => f.RandomByType<int>(minValue: 1))
-            .RuleFor(e => e.Status, f => (int) f.PickRandomWithout(Status.Deleted));
+            .RuleFor(e => e.AuthTemplateId, f => f.RandomByType<int>())
+            .RuleFor(e => e.ResourceId, f => f.RandomByType<int>())
+            .RuleFor(e => e.ActionId, f => f.RandomByType<int>())
+            .RuleFor(e => e.Status, f => f.RandomByType<int>())
+            .RuleFor(e => e.TenantId, f => f.RandomByType<int>());
 
         public static readonly List<AuthTemplateDetail> Entities = EntityFaker.Generate(Constants.DEFAULT_ENTITY_GENERATION_COUNT);
 
@@ -27,12 +29,13 @@ namespace CoreTests.Fixtures.Controllers
         public async Task Insert_ValidRecord_ReturnsRecord(AuthTemplateDetail entity)
         {
             // Arrange
-            var controller = new AuthTemplateDetailsController();
+            var controller = new AuthTemplateDetailController();
 
             // Act
             var response = await controller.Insert(entity);
 
             // Assert
+            // TODO Check for created date/user fields
             response.Should().BeValidWithData();
         }
 
@@ -41,7 +44,7 @@ namespace CoreTests.Fixtures.Controllers
         public async Task Update_ValidRecord_ReturnsRecord(AuthTemplateDetail entity)
         {
             // Arrange
-            var controller = new AuthTemplateDetailsController();
+            var controller = new AuthTemplateDetailController();
 
             // Update fields
 
@@ -49,6 +52,7 @@ namespace CoreTests.Fixtures.Controllers
             var response = await controller.Update(entity);
 
             // Assert
+            // TODO Check for updated date/user fields
             response.Should().BeValidWithData();
         }
 
@@ -57,7 +61,7 @@ namespace CoreTests.Fixtures.Controllers
         public async Task Get_ValidRecord_ReturnsRecord(AuthTemplateDetail entity)
         {
             // Arrange
-            var controller = new AuthTemplateDetailsController();
+            var controller = new AuthTemplateDetailController();
 
             // Act
             var response = await controller.Get(entity);
@@ -71,7 +75,7 @@ namespace CoreTests.Fixtures.Controllers
         public async Task List_ByEntity_ReturnsRecord(AuthTemplateDetail entity)
         {
             // Arrange
-            var controller = new AuthTemplateDetailsController();
+            var controller = new AuthTemplateDetailController();
             var request = TestHelper.CreateListRequest(entity);
 
             // Act
@@ -79,7 +83,7 @@ namespace CoreTests.Fixtures.Controllers
 
             // Assert
             response.Should().BeValidWithData();
-            response.Data.Should().HaveCount(1);
+            response.Data.List.Should().HaveCount(1);
         }
 
         [Test, Order(5)]
@@ -87,7 +91,7 @@ namespace CoreTests.Fixtures.Controllers
         public async Task Delete_ValidRecord_ReturnsTrue(AuthTemplateDetail entity)
         {
             // Arrange
-            var controller = new AuthTemplateDetailsController();
+            var controller = new AuthTemplateDetailController();
 
             // Act
             var response = await controller.Delete(entity);

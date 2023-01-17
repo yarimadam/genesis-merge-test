@@ -1,24 +1,25 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Bogus;
-using CoreSvc.Controllers;
+using CoreTests;
 using CoreTests.Infrastructure;
 using CoreTests.Infrastructure.Extensions;
-using CoreType.DBModels;
-using CoreType.Types;
 using FluentAssertions;
 using NUnit.Framework;
+using CoreSvc.Controllers;
+using CoreType.DBModels;
 
 namespace CoreTests.Fixtures.Controllers
 {
-    [Category("Genesis_API")]
+    [Category("API")]
     public class TenantControllerTest
     {
         public static readonly Faker<Tenant> EntityFaker = new Faker<Tenant>()
-            .RuleFor(e => e.TenantName, f => f.Company.CompanyName())
-            .RuleFor(e => e.TenantType, f => (int) f.PickRandom<TenantType>())
-            .RuleFor(e => e.TaxNumber, f => f.Random.AlphaNumeric(f.Random.Number(1, 10)).ToUpperInvariant())
-            .RuleFor(e => e.Status, f => (int) f.PickRandomWithout(Status.Deleted));
+            .RuleFor(e => e.TenantType, f => f.RandomByType<int>())
+            .RuleFor(e => e.TaxNumber, f => f.RandomByType<string>(maxLength: 20))
+            .RuleFor(e => e.Status, f => f.RandomByType<int>())
+            .RuleFor(e => e.IsDefault, f => f.RandomByType<bool>());
 
         public static readonly List<Tenant> Entities = EntityFaker.Generate(Constants.DEFAULT_ENTITY_GENERATION_COUNT);
 
@@ -33,6 +34,7 @@ namespace CoreTests.Fixtures.Controllers
             var response = await controller.Insert(entity);
 
             // Assert
+            // TODO Check for created date/user fields
             response.Should().BeValidWithData();
         }
 
@@ -49,6 +51,7 @@ namespace CoreTests.Fixtures.Controllers
             var response = await controller.Update(entity);
 
             // Assert
+            // TODO Check for updated date/user fields
             response.Should().BeValidWithData();
         }
 
@@ -82,19 +85,19 @@ namespace CoreTests.Fixtures.Controllers
             response.Data.List.Should().HaveCount(1);
         }
 
-        // [Test, Order(5)]
-        // [TestCaseSource(nameof(Entities))]
-        // public async Task Delete_ValidRecord_ReturnsTrue(Tenant entity)
-        // {
-        //     // Arrange
-        //     var controller = new TenantController();
-        //
-        //     // Act
-        //     var response = await controller.Delete(entity);
-        //
-        //     // Assert
-        //     response.Should().BeValidWithData();
-        //     response.Data.Should().BeTrue();
-        // }
+        [Test, Order(5)]
+        [TestCaseSource(nameof(Entities))]
+        public async Task Delete_ValidRecord_ReturnsTrue(Tenant entity)
+        {
+            // Arrange
+            var controller = new TenantController();
+
+            // Act
+            var response = await controller.Delete(entity);
+
+            // Assert
+            response.Should().BeValidWithData();
+            response.Data.Should().BeTrue();
+        }
     }
 }

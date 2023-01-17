@@ -1,47 +1,49 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Bogus;
-using CoreSvc.Controllers;
+using CoreTests;
 using CoreTests.Infrastructure;
 using CoreTests.Infrastructure.Extensions;
-using CoreType.DBModels;
 using FluentAssertions;
 using NUnit.Framework;
+using CoreSvc.Controllers;
+using CoreType.DBModels;
 
 namespace CoreTests.Fixtures.Controllers
 {
-    [Category("Genesis_API")]
+    [Category("API")]
     public class CoreUserControllerTest
     {
-        public static readonly Faker<CoreUsers> EntityFaker = new Faker<CoreUsers>()
-            .RuleFor(e => e.Name, f => f.Name.FirstName())
+        public static readonly Faker<CoreUser> EntityFaker = new Faker<CoreUser>()
+            .RuleFor(e => e.Name, f => f.RandomByType<string>(maxLength: 50))
             .RuleFor(e => e.Surname, f => f.Name.LastName())
-            .RuleFor(e => e.Email, (f, u) => f.Internet.Email(u.Name, u.Surname))
-            .RuleFor(e => e.Password, (f, u) => f.Internet.Password(8))
-            .RuleFor(e => e.ShouldChangePassword, f => f.RandomByType<bool>());
+            .RuleFor(e => e.ShouldChangePassword, f => f.RandomByType<bool>())
+            .RuleFor(e => e.TenantId, f => f.RandomByType<int>());
 
-        public static readonly List<CoreUsers> Entities = EntityFaker.Generate(Constants.DEFAULT_ENTITY_GENERATION_COUNT);
+        public static readonly List<CoreUser> Entities = EntityFaker.Generate(Constants.DEFAULT_ENTITY_GENERATION_COUNT);
 
         [Test, Order(1)]
         [TestCaseSource(nameof(Entities))]
-        public async Task Insert_ValidRecord_ReturnsRecord(CoreUsers entity)
+        public async Task Insert_ValidRecord_ReturnsRecord(CoreUser entity)
         {
             // Arrange
-            var controller = new UserController();
+            var controller = new CoreUserController();
 
             // Act
             var response = await controller.Insert(entity);
 
             // Assert
+            // TODO Check for created date/user fields
             response.Should().BeValidWithData();
         }
 
         [Test, Order(2)]
         [TestCaseSource(nameof(Entities))]
-        public async Task Update_ValidRecord_ReturnsRecord(CoreUsers entity)
+        public async Task Update_ValidRecord_ReturnsRecord(CoreUser entity)
         {
             // Arrange
-            var controller = new UserController();
+            var controller = new CoreUserController();
 
             // Update fields
 
@@ -49,15 +51,16 @@ namespace CoreTests.Fixtures.Controllers
             var response = await controller.Update(entity);
 
             // Assert
+            // TODO Check for updated date/user fields
             response.Should().BeValidWithData();
         }
 
         [Test, Order(3)]
         [TestCaseSource(nameof(Entities))]
-        public async Task Get_ValidRecord_ReturnsRecord(CoreUsers entity)
+        public async Task Get_ValidRecord_ReturnsRecord(CoreUser entity)
         {
             // Arrange
-            var controller = new UserController();
+            var controller = new CoreUserController();
 
             // Act
             var response = await controller.Get(entity);
@@ -68,10 +71,10 @@ namespace CoreTests.Fixtures.Controllers
 
         [Test, Order(4)]
         [TestCaseSource(nameof(Entities))]
-        public async Task List_ByEntity_ReturnsRecord(CoreUsers entity)
+        public async Task List_ByEntity_ReturnsRecord(CoreUser entity)
         {
             // Arrange
-            var controller = new UserController();
+            var controller = new CoreUserController();
             var request = TestHelper.CreateListRequest(entity);
 
             // Act
@@ -84,10 +87,10 @@ namespace CoreTests.Fixtures.Controllers
 
         [Test, Order(5)]
         [TestCaseSource(nameof(Entities))]
-        public async Task Delete_ValidRecord_ReturnsTrue(CoreUsers entity)
+        public async Task Delete_ValidRecord_ReturnsTrue(CoreUser entity)
         {
             // Arrange
-            var controller = new UserController();
+            var controller = new CoreUserController();
 
             // Act
             var response = await controller.Delete(entity);

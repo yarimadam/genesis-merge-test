@@ -1,4 +1,4 @@
-﻿using CoreType.Types;
+using CoreType.Types;
 
 namespace CoreType.DBModels
 {

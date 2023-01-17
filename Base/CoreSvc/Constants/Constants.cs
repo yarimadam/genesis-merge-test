@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using CoreSvc.Controllers;
 
 namespace CoreSvc
@@ -46,6 +46,23 @@ namespace CoreSvc
             public const string Tenant_Res = "Tenant_Res";
             public const string ChangePassword_Res = "ChangePassword_Res";
             public const string Profile_Res = "Profile_Res";
+            public const string TransactionLog = "TransactionLog_Res";
+            public const string Tenant = "Tenant_Res";
+            public const string SampleEmployeeTask = "SampleEmployeeTask_Res";
+            public const string SampleEmployee = "SampleEmployee_Res";
+            public const string NotificationSetting = "NotificationSetting_Res";
+            public const string Notification = "Notification_Res";
+            public const string CoreUser = "CoreUser_Res";
+            public const string CoreParameter = "CoreParameter_Res";
+            public const string CoreDepartment = "CoreDepartment_Res";
+            public const string CoreCompany = "CoreCompany_Res";
+            public const string CommunicationTemplate = "CommunicationTemplate_Res";
+            public const string CommunicationDefinition = "CommunicationDefinition_Res";
+            public const string AuthUserRight = "AuthUserRight_Res";
+            public const string AuthTemplateDetail = "AuthTemplateDetail_Res";
+            public const string AuthTemplate = "AuthTemplate_Res";
+            public const string AuthResource = "AuthResource_Res";
+            public const string AuthAction = "AuthAction_Res";
         }
     }
 }
